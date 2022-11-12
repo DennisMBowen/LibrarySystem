@@ -14,12 +14,6 @@ public class LibrarySystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LibrarySystemApplication.class, args);
 		
-		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
-		
-		Book b = appContext.getBean("book", Book.class);
-		
-		System.out.println(b.toString());
-		
 		
 	}
 
