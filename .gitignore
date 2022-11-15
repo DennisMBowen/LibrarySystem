@@ -57,4 +57,4 @@ build/
 .vscode/
 
 # Application properties
-application.properties
+*application.properties
