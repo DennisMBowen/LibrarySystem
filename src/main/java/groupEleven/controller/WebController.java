@@ -22,13 +22,24 @@ public class WebController {
 	@Autowired
 	BookRepository repo;
 	
-	@GetMapping({"/", "viewAll"})
+	@GetMapping({"/viewAll"})
 	public String viewAllBooks(Model model) {
 		//if(repo.findAll().isEmpty()) {
 			//return addNewBook(model);
 		//}
 		model.addAttribute("books", repo.findAll());
 		return "results";
+	}
+	
+	@GetMapping("/addSample")
+	public String addSampleBooks(Model model) {
+		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590", 1);
+		repo.save(b);
+		b = new Book("Moby Dick", "Herman Melville", "9781566192637", 1);
+		repo.save(b);
+		b = new Book("Great Expectations", "Charles Dickens", "9780582330887", 1);
+		repo.save(b);
+		return viewAllBooks(model);
 	}
 
 	@GetMapping("/edit/{id}")
