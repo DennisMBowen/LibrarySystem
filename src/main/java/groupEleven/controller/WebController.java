@@ -44,4 +44,18 @@ public class WebController {
 		return viewAllBooks(model);
 	}
 	
+	@GetMapping("/addBook")
+	  public String addNewBook(Model model) {
+		Book b = new Book();
+		model.addAttribute("newBook", b);
+		return "add";
+	}
+	
+	@PostMapping("/addBook")
+	  public String addNewBook(@ModelAttribute Book b, Model model) {
+		repo.save(b);
+		return viewAllBooks(model);
+	}
+	
+	
 }

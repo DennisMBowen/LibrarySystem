@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Book</title>
+<script>
+function verifyTitleInput () {
+	if (document.getElementById("titleInput").value === "") {
+		alert("please input a title");
+		return false;
+	} else {
+		return true;
+	}
+	
+	}
+	
+	function verifyAuthorInput() {
+		if (document.getElementById("authorInput").value === "") {
+			alert("please input an author");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function verifyISBNInput() {
+		if (document.getElementById("isbnInput").value === "") {
+			alert("please input an ISBN");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function verifyQuantityInput() {
+		if (document.getElementById("quantityInput").value === "") {
+			alert("please input a quantity");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function verifyAll() {
+		let returnBoolean = false;
+		if(verifyTitleInput() == true && verifyAuthorInput() == true && verifyISBNInput() == true && verifyQuantityInput() == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+</script>
+</head>
+<body>
+<h1>Add Book</h1>
+  <form id="form" th:object="${newBook}" th:action="@{/update/{id}(id=${newBook.id})}" method=POST onsubmit="return verifyAll()">
+  
+  <p>Title:</p> <input name="title" id="titleInput" size="20" th:field="*{title}"> <br />
+  <p>Author:</p> <input name="author" id="authorInput" size="10" th:field="*{author}"><br />
+  <p>ISBN:</p> <input name="isbn" id="isbnInput" size="20" th:field="*{isbn}"><br />
+  <p>Quantity</p> <input name="quantity" id="quantityInput" size="20" th:field="*{quantity}"><br />
+  
+  
+
+  <input name="submit" id="formSubmit" type="submit" value="submit" />
+  </form>
+  <a href="../viewAll">View all Books</a>
+
+</body>
+</html>
