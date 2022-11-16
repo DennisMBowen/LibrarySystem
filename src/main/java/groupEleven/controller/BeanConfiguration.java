@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import groupEleven.beans.Book;
-import groupEleven.beans.User;
+import groupEleven.beans.Patron;
 
 @Configuration
 public class BeanConfiguration {
@@ -16,8 +16,8 @@ public class BeanConfiguration {
 	}
 	
 	@Bean
-	public User user() {
-		User bean = new User();
+	public Patron user() {
+		Patron bean = new Patron();
 		return bean;
 	}
 

@@ -14,7 +14,7 @@
  				<td th:text="${currentBook.author}" />
  				<td th:text="${currentBook.isbn}" />
  				<td th:text="${currentBook.quantity}" />
- 				<td th:text="${currentBook.user}" />
+ 				<td th:text="${currentBook.patron}" />
  				<td><a th:href="@{/edit/{id}(id=${currentBook.id})}">Edit</a></td>
  				<td><a th:href = "@{/delete/{id}(id=${currentBook.id})}">Delete Book</a></td>
 			</tr>

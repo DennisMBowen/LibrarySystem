@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-public class User {
+public class Patron {
 	@Id
 	@GeneratedValue
 	private long id;

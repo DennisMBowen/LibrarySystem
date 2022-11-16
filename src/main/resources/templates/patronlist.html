@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List of Patrons</title>
+</head>
+<body>
+<h1>Patrons</h1>
+	<table>
+		<tr th:each="currentPatron : ${patrons}">
+			<td th:text="${currentPatron.userName}" />
+			<td th:text="${currentPatron.password}" />
+			<td th:text="${currentPatron.firstName}" />
+			<td th:text="${currentPatron.lastName}" />
+			<td><a th:href="@{/viewCheckedOut/{id}(id=${currentPatron.id})}">View Checked out books</a>
+			<td><a th:href="@{/checkOut/{id}(id=${currentPatron.id})}">Check out Books</a>
+		</tr>
+	</table>
+	<a href="../index.html">Index</a>
+</body>
+</html>
