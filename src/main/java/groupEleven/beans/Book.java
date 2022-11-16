@@ -1,5 +1,7 @@
 package groupEleven.beans;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,19 +24,19 @@ public class Book {
 	private String title;
 	private String author;
 	private String isbn;
-	private int quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "patron", nullable = true)
 	private Patron patron;
+	
+	private LocalDate dueDate;
 		
 	//Constructor using all fields except id
-	public Book(String title, String author, String isbn, int quantity) {
+	public Book(String title, String author, String isbn) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
-		this.quantity = quantity;
 	}
 
 }

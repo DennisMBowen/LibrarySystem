@@ -33,11 +33,11 @@ public class BookWebController {
 	
 	@GetMapping("/addSample")
 	public String addSampleBooks(Model model) {
-		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590", 1);
+		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590");
 		repo.save(b);
-		b = new Book("Moby Dick", "Herman Melville", "9781566192637", 1);
+		b = new Book("Moby Dick", "Herman Melville", "9781566192637");
 		repo.save(b);
-		b = new Book("Great Expectations", "Charles Dickens", "9780582330887", 1);
+		b = new Book("Great Expectations", "Charles Dickens", "9780582330887");
 		repo.save(b);
 		return viewAllBooks(model);
 	}
