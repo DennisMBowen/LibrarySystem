@@ -49,6 +49,13 @@ public class WebController {
 		return "edit";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String deleteBook(@PathVariable("id") long id, Model model) {
+		Book b = repo.findById(id).orElse(null);
+		repo.delete(b);
+		return viewAllBooks(model);
+	}
+	
 	@PostMapping("/update/{id}")
 	public String reviseBook(Book b, Model model) {
 		repo.save(b);
