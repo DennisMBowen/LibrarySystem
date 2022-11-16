@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>User Input</title>
+<title>Patron Input</title>
 </head>
 <body>
-	<h1>User Input</h1>
-	<form th:object="${newUser}" th:action="@{/addUser}" method=POST>
+	<h1>Patron Input</h1>
+	<form th:object="${newPatron}" th:action="@{/addPatron}" method=POST>
 User Name: <input name="userName" size="20" th:field="*{userName}"><br />
 Password: <input name="password" size="20" th:field="*{password}"><br />
 First Name: <input name="firstName" size="20" th:field="*{firstName}"><br />

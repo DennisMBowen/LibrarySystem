@@ -58,3 +58,6 @@ build/
 
 # Application properties
 *application.properties
+
+# bin
+bin\*
