@@ -1,8 +1,11 @@
 package groupEleven.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -15,6 +18,11 @@ public class Book {
 	private String author;
 	private String isbn;
 	private int quantity;
+	
+	// optional = true and nullable = true means there's no foreign key restrains
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "user", nullable = true)
+	private User user;
 		
 	//Default no-arg constructor
 	public Book() {
@@ -70,6 +78,15 @@ public class Book {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User u) {
+		this.user = u;
 	}
 
 	//To String method

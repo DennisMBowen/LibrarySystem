@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Check out book</title>
+</head>
+<body>
+	<h1>Check out a book for <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></h1>
+	<table>
+		<tr th:each="currentBook : ${books}">
+			<td th:text="${currentBook.id}" />
+			<td th:text="${currentBook.title}" />
+			<td th:text="${currentBook.author}" />
+			<td th:text="${currentBook.isbn}" />
+			<td th:text="${currentBook.quantity}" />
+			<td><a th:href="@{/checkOut/{id}/{bid}(id=${user.id},bid=${currentBook.id})}">Check out Book</a>
+		</tr>
+	</table>
+</body>
+</html>
