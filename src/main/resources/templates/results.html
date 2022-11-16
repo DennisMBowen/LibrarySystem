@@ -16,6 +16,7 @@
  				<td th:text="${currentBook.quantity}" />
  				<td th:text="${currentBook.user}" />
  				<td><a th:href="@{/edit/{id}(id=${currentBook.id})}">Edit</a></td>
+ 				<td><a th:href = "@{/delete/{id}(id=${currentBook.id})}">Delete Book</a></td>
 			</tr>
 		</table>
 	</form>
