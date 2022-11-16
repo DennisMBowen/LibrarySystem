@@ -14,10 +14,12 @@
  				<td th:text="${currentBook.author}" />
  				<td th:text="${currentBook.isbn}" />
  				<td th:text="${currentBook.quantity}" />
+ 				<td th:text="${currentBook.user}" />
  				<td><a th:href="@{/edit/{id}(id=${currentBook.id})}">Edit</a></td>
 			</tr>
 		</table>
 	</form>
-	  <a href="../addBook">Add a new book</a>
+	<a href="../addBook">Add a new book</a>
+	<a href="../index.html">Index</a>
 </body>
 </html>
