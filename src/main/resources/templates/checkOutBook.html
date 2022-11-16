@@ -12,7 +12,6 @@
 			<td th:text="${currentBook.title}" />
 			<td th:text="${currentBook.author}" />
 			<td th:text="${currentBook.isbn}" />
-			<td th:text="${currentBook.quantity}" />
 			<td><a th:href="@{/checkOut/{id}/{bid}(id=${patron.id},bid=${currentBook.id})}">Check out Book</a>
 		</tr>
 	</table>

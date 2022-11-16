@@ -1,5 +1,7 @@
 package groupEleven.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +49,9 @@ public class PatronWebController {
 	@GetMapping ("viewCheckedOut/{id}")
 	public String viewCheckedOutBooks(@PathVariable("id") long id, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
+		model.addAttribute("patron", p);
 		model.addAttribute("books", p.getCheckedOutBooks());
-		return "results";
+		return "checkedoutbooks";
 	}
 	
 	@GetMapping ("/checkOut/{id}")
@@ -65,6 +68,9 @@ public class PatronWebController {
 		Book b = bookRepo.findById(bid).orElse(null);
 		p.checkOutBook(b);
 		b.setPatron(p);
+		//sets dueDate on Book entity to 2 weeks from now()
+		LocalDate dueDate = LocalDate.now().plusDays(14);
+		b.setDueDate(dueDate);
 		patronRepo.save(p);
 		bookRepo.save(b);
 		return viewPatrons(model);
