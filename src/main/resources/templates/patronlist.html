@@ -2,20 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>List of Patrons</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<title>Library | Patrons List</title>
+
+<style>
+body {
+background-image: url("/images/library-background.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
 </head>
+
+<div class="container">
+<header>
+	<h1 style="color: white; text-align: center">Patrons</h1>
+	
+		<nav class="navbar navbar-expand-sm bg-light navbar-light shadow rounded">
+     	<ul class="navbar-nav">
+    		  <li class="nav-item">
+         		 <a href="../index.html" class="nav-link">Home
+         		 </a>
+      		  </li>
+      		  <li class="nav-item">
+         		 <a href="/viewAll" class="nav-link">Catalog</a>
+        	</li>
+       		 <li class="nav-item">  
+        		  <a href="/viewPatrons" class="nav-link active">Patrons</a>
+        	</li>  
+      	</ul>
+      </nav>
+
+</header>
+<br>
 <body>
-<h1>Patrons</h1>
-	<table>
-		<tr th:each="currentPatron : ${patrons}">
-			<td th:text="${currentPatron.userName}" />
-			<td th:text="${currentPatron.password}" />
-			<td th:text="${currentPatron.firstName}" />
-			<td th:text="${currentPatron.lastName}" />
-			<td><a th:href="@{/viewCheckedOut/{id}(id=${currentPatron.id})}">View Checked out books</a>
-			<td><a th:href="@{/checkOut/{id}(id=${currentPatron.id})}">Check out Books</a>
-		</tr>
-	</table>
-	<a href="../index.html">Index</a>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded">
+	<form>
+		<table class="table table-hover">
+		 <thead>
+			<tr>
+				<th>UserName</th>
+				<th>Password</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr th:each="currentPatron : ${patrons}">
+				<td th:text="${currentPatron.userName}" />
+				<td th:text="${currentPatron.password}" />
+				<td th:text="${currentPatron.firstName}" />
+				<td th:text="${currentPatron.lastName}" />
+				<td><a th:href="@{/viewCheckedOut/{id}(id=${currentPatron.id})}">View Checked out books</a>
+				<td><a th:href="@{/checkOut/{id}(id=${currentPatron.id})}">Check out Books</a>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+		<a href="/addPatron">Add patron</a>	
+	</div>
 </body>
+</div>
 </html>
