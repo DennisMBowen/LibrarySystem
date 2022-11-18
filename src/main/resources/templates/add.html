@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Book</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<title>Library | Add Book</title>
+
+<style>
+body {
+background-image: url("/images/library-background.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
 <script>
 	function verifyTitleInput () {
 		if (document.getElementById("titleInput").value === "") {
-			alert("please input a title");
 			return false;
 		} else {
 			return true;
@@ -14,8 +24,7 @@
 	}
 	
 	function verifyAuthorInput() {
-		if (document.getElementById("authorInput").value === "") {
-			alert("please input an author");
+		if (document.getElementById("authorInput").value === "") {;
 			return false;
 		} else {
 			return true;
@@ -23,7 +32,6 @@
 	}
 	function verifyISBNInput() {
 		if (document.getElementById("isbnInput").value === "") {
-			alert("please input an ISBN");
 			return false;
 		} else {
 			return true;
@@ -31,29 +39,68 @@
 	}
 	
 	function verifyAll() {
-		let returnBoolean = false;
-		if(verifyTitleInput() == true && verifyAuthorInput() == true && verifyISBNInput() == true && verifyQuantityInput() == true) {
-			return true;
-		} else {
-			return false;
+		let returnBoolean = true;
+	
+		
+		if(verifyTitleInput() == false) {
+			document.getElementById("titleSpan").innerHTML = "<p style='margin: -20px 0px 10px 0px; color: red'>Please input a title</p>";
+			returnBoolean = false;
 		}
+		if(verifyAuthorInput() == false) {
+			document.getElementById("authorSpan").innerHTML = "<p style='margin: -20px 0px 10px 0px; color: red'>Please input an author</p>";
+			returnBoolean = false;
+		}
+		if(verifyISBNInput() == false) {
+			document.getElementById("isbnSpan").innerHTML = "<p style='margin: -20px 0px 10px 0px; color: red'>Please input an ISBN</p>";
+			returnBoolean = false;
+		}
+		
+		return returnBoolean;
 	}
 
 </script>
 </head>
+<div class="container">
+<header>
+	<h1 style="color: white; text-align: center">Catalog</h1>
+	
+		<nav class="navbar navbar-expand-sm bg-light navbar-light shadow rounded">
+     	<ul class="navbar-nav">
+    		  <li class="nav-item">
+         		 <a href="../index.html" class="nav-link">Home
+         		 </a>
+      		  </li>
+      		  <li class="nav-item">
+         		 <a href="/viewAll" class="nav-link active">Catalog</a>
+        	</li>
+       		 <li class="nav-item">  
+        		  <a href="/viewPatrons" class="nav-link">Patrons</a>
+        	</li>  
+   
+      	</ul>
+      </nav>
+
+</header>
+<br>
 <body>
-<h1>Add Book</h1>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded">
+<h1 style="text-align: center">Add Book</h1>
+<div class="form-group">
   <form id="form" th:object="${newBook}" th:action="@{/update/{id}(id=${newBook.id})}" method=POST onsubmit="return verifyAll()">
   
-  <p>Title:</p> <input name="title" id="titleInput" size="20" th:field="*{title}"> <br />
-  <p>Author:</p> <input name="author" id="authorInput" size="10" th:field="*{author}"><br />
-  <p>ISBN:</p> <input name="isbn" id="isbnInput" size="20" th:field="*{isbn}"><br />
+  <p>Title:</p> <input class="form-control" name="title" id="titleInput" size="20" placeholder="Enter title" th:field="*{title}"> <br />
+  <span id="titleSpan"></span>
+  <p>Author:</p> <input class="form-control" name="author" id="authorInput" size="10" placeholder="Enter author" th:field="*{author}"><br />
+  <span id="authorSpan"></span>
+  <p>ISBN:</p> <input class="form-control" name="isbn" id="isbnInput" size="20" placeholder="Enter ISBN" th:field="*{isbn}"><br />
+  <span id="isbnSpan"></span>
   
   
-
-  <input name="submit" id="formSubmit" type="submit" value="submit" />
+</div>
+  <input name="submit" class="btn btn-primary" id="formSubmit" type="submit" value="Submit" />
   </form>
   <a href="../viewAll">View all Books</a>
-
+</div>
 </body>
+	</div>
 </html>
