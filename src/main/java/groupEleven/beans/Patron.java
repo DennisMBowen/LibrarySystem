@@ -37,4 +37,8 @@ public class Patron {
 	public void checkOutBook(Book b) {
 		this.checkedOutBooks.add(b);
 	}
+	
+	public void returnBook(Book b) {
+		this.checkedOutBooks.remove(b);
+	}
 }

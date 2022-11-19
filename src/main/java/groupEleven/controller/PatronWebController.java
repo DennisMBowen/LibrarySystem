@@ -75,4 +75,16 @@ public class PatronWebController {
 		bookRepo.save(b);
 		return viewPatrons(model);
 	}
+	
+	@GetMapping ("/returnBook/{id}/{bid}")
+	public String returnBook(@PathVariable("id") long id, @PathVariable("bid") long bid, Model model) {
+		Patron p = patronRepo.findById(id).orElse(null);
+		Book b = bookRepo.findById(bid).orElse(null);
+		p.returnBook(b);
+		b.setPatron(null);
+		patronRepo.save(p);
+		bookRepo.save(b);
+		//Will eventually add method to determine if book was returned late
+		return viewPatrons(model);
+	}
 }
