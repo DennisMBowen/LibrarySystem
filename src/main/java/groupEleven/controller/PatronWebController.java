@@ -82,7 +82,7 @@ public class PatronWebController {
 		Book b = bookRepo.findById(bid).orElse(null);
 		p.returnBook(b);
 		b.setPatron(null);
-		patronRepo.save(p);
+		b.setDueDate(null);
 		bookRepo.save(b);
 		//Will eventually add method to determine if book was returned late
 		return viewPatrons(model);
