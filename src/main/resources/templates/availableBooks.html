@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+	
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<title>Library | Catalog</title>
+<style>
+body {
+background-image: url("/images/library-background.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
+</head>
+<div class="container">
+<header>
+  <h1 style="color: white; text-align: center">Catalog</h1>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light shadow rounded">
+      <ul class="navbar-nav">
+      <li class="nav-item">
+          <a href="../index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/viewAll" class="nav-link active">Catalog</a>
+        </li>
+        <li class="nav-item">  
+          <a href="/viewPatrons" class="nav-link">Patrons</a>
+        </li>  
+      </ul>
+      </nav>
+
+</header>
+<br>
+<body>
+
+  <div class="container shadow-lg p-3 mb-5 bg-white rounded">
+	<form>
+		<table class="table table-hover">
+		  <thead>
+			<tr>
+				<th scope >ID</th>
+				<th>Title</th>
+				<th>Author</th>
+				<th>ISBN</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="currentBook : ${books}">
+ 				<td th:text="${currentBook.id}" />
+ 				<td th:text="${currentBook.title}" />
+ 				<td th:text="${currentBook.author}" />
+ 				<td th:text="${currentBook.isbn}" />
+			</tr>
+			</tbody>
+		</table>
+	</form>
+	<a href="../addBook" style="padding: 5px 5px 5px 5px">Add a new book</a>
+	<a href="/addSample">Add sample books</a>
+	<a href="/viewAll" style="padding: 5px 5px 5px 5px">View Catalog</a>
+	<br>
+	</div>
+
+</body>
+	</div>
+</html>

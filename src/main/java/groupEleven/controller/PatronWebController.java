@@ -1,6 +1,8 @@
 package groupEleven.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +60,16 @@ public class PatronWebController {
 	public String checkOutBooks(@PathVariable("id") long id, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
 		model.addAttribute("patron", p);
-		model.addAttribute("books", bookRepo.findAll());
+		List<Book> availableBooks = new ArrayList<Book>();
+		List <Book> allBooks = new ArrayList<Book>();
+		allBooks = (List<Book>) bookRepo.findAll();
+		for (int i = 0; i < allBooks.size(); i++) {
+			Book currentBook = allBooks.get(i);
+			if(currentBook.getDueDate()== null){
+				availableBooks.add(currentBook);
+			}
+		}
+		model.addAttribute("books", availableBooks);
 		return "checkOutBook";
 	}
 	
