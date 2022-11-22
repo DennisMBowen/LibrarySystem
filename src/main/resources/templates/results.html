@@ -45,6 +45,7 @@ background-attachment: fixed;
 				<th>Title</th>
 				<th>Author</th>
 				<th>ISBN</th>
+				<th>Date Due</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -53,6 +54,7 @@ background-attachment: fixed;
  				<td th:text="${currentBook.title}" />
  				<td th:text="${currentBook.author}" />
  				<td th:text="${currentBook.isbn}" />
+ 				<td th:text="${#temporals.format(currentBook.dueDate, 'MM-dd-yyyy')}" />
  				<td><a th:href="@{/edit/{id}(id=${currentBook.id})}">Edit</a></td>
  				<td><a th:href = "@{/delete/{id}(id=${currentBook.id})}">Delete Book</a></td>
 			</tr>
@@ -61,6 +63,7 @@ background-attachment: fixed;
 	</form>
 	<a href="../addBook" style="padding: 5px 5px 5px 5px">Add a new book</a>
 	<a href="/addSample">Add sample books</a>
+	<a href="/viewAvailable" style="padding: 5px 5px 5px 5px">View Checked-in Books</a>
 	<br>
 	</div>
 

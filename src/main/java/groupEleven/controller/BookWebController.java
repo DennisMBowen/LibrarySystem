@@ -1,5 +1,8 @@
 package groupEleven.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,22 @@ public class BookWebController {
 		model.addAttribute("books", repo.findAll());
 		return "results";
 	}
+	
+	@GetMapping({"/viewAvailable"})
+	public String viewAvailableBooks (Model model) {
+		List<Book> availableBooks = new ArrayList<Book>();
+		List <Book> allBooks = new ArrayList<Book>();
+		allBooks = (List<Book>) repo.findAll();
+		for (int i = 0; i < allBooks.size(); i++) {
+			Book currentBook = allBooks.get(i);
+			if(currentBook.getDueDate()== null){
+				availableBooks.add(currentBook);
+			}
+		}
+		model.addAttribute("books", availableBooks);
+		return "availableBooks";
+	}
+
 	
 	@GetMapping("/addSample")
 	public String addSampleBooks(Model model) {
