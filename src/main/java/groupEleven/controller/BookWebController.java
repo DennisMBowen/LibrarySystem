@@ -46,7 +46,7 @@ public class BookWebController {
 			}
 		}
 		model.addAttribute("books", availableBooks);
-		return "availableBooks";
+		return "checkedInBooks";
 	}
 
 	
