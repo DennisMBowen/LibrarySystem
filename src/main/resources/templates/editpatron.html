@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Patron</title>
+</head>
+<body>
+	<h1>Edit Patron</h1>
+	<form th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST> 
+    	User Name: <input name="userName" class="form-control" size="20" th:field="*{userName}"> <br />
+ 		Password: <input name="password" class="form-control" size="20" th:field="*{password}"> <br />
+ 		First Name: <input name="firstName" class="form-control" size="20" th:field="*{firstName}"> <br />
+ 		Last Name: <input name="lastName" class="form-control" size="20" th:field="*{lastName}"> <br />
+ 		
+ 		<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
+ 	</form>
+
+</body>
+</html>
