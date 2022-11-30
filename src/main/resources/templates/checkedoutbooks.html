@@ -13,6 +13,8 @@ background-attachment: fixed;
 }
 </style>
 </head>
+
+<body>
 <div class="container">
 <header>
 <h1 style="color: white; text-align: center">Patrons</h1>
@@ -35,9 +37,8 @@ background-attachment: fixed;
 
 </header>
 <br>
-<body>
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-  <h1>Books Checked out by <span th:text="${patron.userName}"></span></h1>
+  <h1>Books Checked out by <span th:text="${patron.firstName} + ' ' + ${patron.lastName}"></span></h1>
 	<form>
 		<table class="table table-hover">
 		<thead>
@@ -62,5 +63,6 @@ background-attachment: fixed;
 	<a th:href="@{/checkOut/{id}(id=${patron.id})}">Check out a new book</a>
 	<a href="../index.html">Index</a>
 	</div>
+</div>
 </body>
 </html>

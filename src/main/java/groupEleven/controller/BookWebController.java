@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import groupEleven.beans.Book;
+import groupEleven.beans.Patron;
 import groupEleven.repository.BookRepository;
+import groupEleven.repository.PatronRepository;
 
 /**
  * @author group eleven
@@ -26,25 +28,27 @@ import groupEleven.repository.BookRepository;
 @Controller
 public class BookWebController {
 	@Autowired
-	BookRepository repo;
+	BookRepository bookRepo;
+	@Autowired
+	PatronRepository patronRepo;
 	
 	@GetMapping({"/viewAll"})
 	public String viewAllBooks(Model model) {
 		//if(repo.findAll().isEmpty()) {
 			//return addNewBook(model);
 		//}
-		model.addAttribute("books", repo.findAll());
+		model.addAttribute("books", bookRepo.findAll());
 		return "results";
 	}
 	
-	@GetMapping({"/viewAvailable"})
-	public String viewAvailableBooks (Model model) {
+	@GetMapping("/viewAvailable")
+	public String viewAvailableBooks(Model model) {
 		List<Book> availableBooks = new ArrayList<Book>();
 		List <Book> allBooks = new ArrayList<Book>();
-		allBooks = (List<Book>) repo.findAll();
+		allBooks = (List<Book>) bookRepo.findAll();
 		for (int i = 0; i < allBooks.size(); i++) {
 			Book currentBook = allBooks.get(i);
-			if(currentBook.getDueDate()== null){
+			if(currentBook.getPatron()== null){
 				availableBooks.add(currentBook);
 			}
 		}
@@ -52,35 +56,73 @@ public class BookWebController {
 		return "checkedInBooks";
 	}
 
+	@GetMapping("/viewOverdue")
+	public String viewOverdueBooks(Model model) {
+		List<Book> overdueBooks = new ArrayList<Book>();
+		List <Book> allBooks = new ArrayList<Book>();
+		allBooks = (List<Book>) bookRepo.findAll();
+		for (int i = 0; i < allBooks.size(); i++) {
+			Book currentBook = allBooks.get(i);
+			// checks to make sure dueDate isn't null before calling isBefore()
+			if(currentBook.getDueDate() != null){
+				// checks if dueDate is before now
+				if(currentBook.getDueDate().isBefore(LocalDate.now()) == true) {
+					overdueBooks.add(currentBook);
+				}
+			}
+		}
+		model.addAttribute("books", overdueBooks);
+		return "overduebooks";
+	}
 	
 	@GetMapping("/addSample")
 	public String addSampleBooks(Model model) {
-		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590");
-		repo.save(b);
-		b = new Book("Moby Dick", "Herman Melville", "9781566192637");
-		repo.save(b);
-		b = new Book("Great Expectations", "Charles Dickens", "9780582330887");
-		repo.save(b);
+		Patron p = new Patron("aheinrichs", "root", "Alex", "Heinrichs", null);
+		Patron p2 = new Patron("jhill", "yeet", "Joe", "Hill", null);
+		patronRepo.save(p);
+		patronRepo.save(p2);
+		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590", null, LocalDate.of(2022, 11, 29));
+		b.setPatron(p);
+		p.checkOutBook(b);
+		bookRepo.save(b);
+		b = new Book("Moby Dick", "Herman Melville", "9781566192637", null, LocalDate.of(2022, 12, 2));
+		b.setPatron(p);
+		p.checkOutBook(b);
+		bookRepo.save(b);
+		b = new Book("House of Leaves", "Mark Danielewski", "9780375407321");
+		bookRepo.save(b);
+		b = new Book("Great Expectations", "Charles Dickens", "9780582330887", null, LocalDate.of(1980, 6, 12));
+		b.setPatron(p2);
+		p2.checkOutBook(b);
+		bookRepo.save(b);
+		b = new Book("Haunting of Hill House", "Shirley Jackson", "9788477026211", null, LocalDate.of(2022, 11, 25));
+		b.setPatron(p);
+		p.checkOutBook(b);
+		bookRepo.save(b);
+		b = new Book("1984", "George Orwell", "9780151660346");
+		bookRepo.save(b);
+		patronRepo.save(p);
+		patronRepo.save(p2);
 		return viewAllBooks(model);
 	}
 
 	@GetMapping("/edit/{id}")
 	public String showUpdateBook(@PathVariable("id") long id, @DateTimeFormat(pattern="yyyy-MM-dd") Model model) {
-		Book b = repo.findById(id).orElse(null);
+		Book b = bookRepo.findById(id).orElse(null);
 		model.addAttribute("newBook", b);
 		return "edit";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable("id") long id, Model model) {
-		Book b = repo.findById(id).orElse(null);
-		repo.delete(b);
+		Book b = bookRepo.findById(id).orElse(null);
+		bookRepo.delete(b);
 		return viewAllBooks(model);
 	}
 	
 	@PostMapping("/update/{id}")
 	public String reviseBook(Book b, @DateTimeFormat(pattern="yyyy-MM-dd") Model model) {
-		repo.save(b);
+		bookRepo.save(b);
 		return viewAllBooks(model);
 	}
 
@@ -94,7 +136,7 @@ public class BookWebController {
 	
 	@PostMapping("/addBook")
 	  public String addNewBook(@ModelAttribute Book b, Model model) {
-		repo.save(b);
+		bookRepo.save(b);
 		return viewAllBooks(model);
 	}
 	

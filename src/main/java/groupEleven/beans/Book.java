@@ -41,6 +41,15 @@ public class Book {
 		this.isbn = isbn;
 	}
 	
+	public Book(String title, String author, String isbn, Patron patron, LocalDate dueDate) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.patron = patron;
+		this.dueDate = dueDate;
+	}
+	
 	public boolean isOverdue() {
 		LocalDate today = LocalDate.now();
 		 if(this.dueDate.isBefore(today)) {
