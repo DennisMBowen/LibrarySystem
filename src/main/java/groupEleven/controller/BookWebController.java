@@ -1,9 +1,12 @@
 package groupEleven.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +65,7 @@ public class BookWebController {
 	}
 
 	@GetMapping("/edit/{id}")
-	public String showUpdateBook(@PathVariable("id") long id, Model model) {
+	public String showUpdateBook(@PathVariable("id") long id, @DateTimeFormat(pattern="yyyy-MM-dd") Model model) {
 		Book b = repo.findById(id).orElse(null);
 		model.addAttribute("newBook", b);
 		return "edit";
@@ -76,10 +79,11 @@ public class BookWebController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String reviseBook(Book b, Model model) {
+	public String reviseBook(Book b, @DateTimeFormat(pattern="yyyy-MM-dd") Model model) {
 		repo.save(b);
 		return viewAllBooks(model);
 	}
+
 	
 	@GetMapping("/addBook")
 	  public String addNewBook(Model model) {
