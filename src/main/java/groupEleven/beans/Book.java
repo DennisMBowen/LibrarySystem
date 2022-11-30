@@ -40,5 +40,14 @@ public class Book {
 		this.author = author;
 		this.isbn = isbn;
 	}
+	
+	public boolean isOverdue() {
+		LocalDate today = LocalDate.now();
+		 if(this.dueDate.isBefore(today)) {
+			 return true;
+		 } else {
+			 return false;
+		 }
+	}
 
 }

@@ -111,11 +111,18 @@ public class PatronWebController {
 	public String returnBook(@PathVariable("id") long id, @PathVariable("bid") long bid, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
 		Book b = bookRepo.findById(bid).orElse(null);
+		
+		//Console print to test isOverdue book function
+		if (b.isOverdue()) {
+			System.out.println(b.getTitle() + " is overdue.");
+		} else {
+			System.out.println (b.getTitle() + " is not overdue");
+		}
+		
 		p.returnBook(b);
 		b.setPatron(null);
 		b.setDueDate(null);
 		bookRepo.save(b);
-		//Will eventually add method to determine if book was returned late
 		return viewPatrons(model);
 	}
 }
