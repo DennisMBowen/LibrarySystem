@@ -1,5 +1,6 @@
 package groupEleven.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,6 +35,19 @@ public class Patron {
 	@JoinColumn(name = "books", nullable = true)
 	private List<Book> checkedOutBooks;
 	
+	public Patron(String userName, String password, String firstName, String lastName, List<Book> checkedOutBooks) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		if(checkedOutBooks == null) {
+			this.checkedOutBooks = new ArrayList<Book>();
+		} else {
+			this.checkedOutBooks = checkedOutBooks;
+		}
+	}
+	
 	public void checkOutBook(Book b) {
 		this.checkedOutBooks.add(b);
 	}
@@ -41,4 +55,5 @@ public class Patron {
 	public void returnBook(Book b) {
 		this.checkedOutBooks.remove(b);
 	}
+
 }
