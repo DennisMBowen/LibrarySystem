@@ -52,11 +52,13 @@ public class Book {
 	
 	public boolean isOverdue() {
 		LocalDate today = LocalDate.now();
-		 if(this.dueDate.isBefore(today)) {
-			 return true;
-		 } else {
-			 return false;
-		 }
+		if(this.dueDate == null) {
+			return false;
+		} else if(this.dueDate.isBefore(today)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

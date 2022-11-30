@@ -63,12 +63,8 @@ public class BookWebController {
 		allBooks = (List<Book>) bookRepo.findAll();
 		for (int i = 0; i < allBooks.size(); i++) {
 			Book currentBook = allBooks.get(i);
-			// checks to make sure dueDate isn't null before calling isBefore()
-			if(currentBook.getDueDate() != null){
-				// checks if dueDate is before now
-				if(currentBook.getDueDate().isBefore(LocalDate.now()) == true) {
-					overdueBooks.add(currentBook);
-				}
+			if(currentBook.isOverdue() == true){
+				overdueBooks.add(currentBook);
 			}
 		}
 		model.addAttribute("books", overdueBooks);
