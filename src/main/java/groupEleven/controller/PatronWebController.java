@@ -42,6 +42,26 @@ public class PatronWebController {
 		return "patroninput";
 	}
 	
+	@GetMapping("/editPatron/{id}")
+	public String showUpdatePatron(@PathVariable("id") long id, Model model) {
+		Patron p = patronRepo.findById(id).orElse(null);
+		model.addAttribute("newPatron", p);
+		return "editpatron";
+	}
+	
+	@GetMapping("/deletePatron/{id}")
+	public String deletePatron(@PathVariable("id") long id, Model model) {
+		Patron p = patronRepo.findById(id).orElse(null);
+		patronRepo.delete(p);
+		return viewPatrons(model);
+	}
+	
+	@PostMapping("/updatePatron/{id}")
+	public String revisePatron(Patron p, Model model) {
+		patronRepo.save(p);
+		return viewPatrons(model);
+	}
+	
 	@PostMapping ({"/addPatron"})
 	public String addNewPatron(@ModelAttribute Patron p, Model model) {
 		patronRepo.save(p);
