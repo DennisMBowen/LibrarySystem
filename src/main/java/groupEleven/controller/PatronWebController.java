@@ -113,6 +113,8 @@ public class PatronWebController {
 		Book b = bookRepo.findById(bid).orElse(null);
 		if (!b.isOverdue()) {
 			b.setDueDate(b.getDueDate().plusDays(14));
+		} else {
+			System.out.println("Unable to return. Book is overdue.");
 		}
 		bookRepo.save(b);
 		return viewCheckedOutBooks(id, model);
