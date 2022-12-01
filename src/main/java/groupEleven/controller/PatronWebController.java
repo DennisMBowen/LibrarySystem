@@ -107,6 +107,18 @@ public class PatronWebController {
 		return viewPatrons(model);
 	}
 	
+	@GetMapping("/renew/{id}/{bid}")
+	public String renewBook(@PathVariable("id") long id, @PathVariable("bid") long bid, Model model) {
+		Patron p = patronRepo.findById(id).orElse(null);
+		Book b = bookRepo.findById(bid).orElse(null);
+		if (!b.isOverdue()) {
+			b.setDueDate(b.getDueDate().plusDays(14));
+		}
+		bookRepo.save(b);
+		return viewCheckedOutBooks(id, model);
+	}
+	
+	
 	@GetMapping ("/returnBook/{id}/{bid}")
 	public String returnBook(@PathVariable("id") long id, @PathVariable("bid") long bid, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
@@ -123,6 +135,6 @@ public class PatronWebController {
 		b.setPatron(null);
 		b.setDueDate(null);
 		bookRepo.save(b);
-		return viewPatrons(model);
+		return viewCheckedOutBooks(id, model);
 	}
 }
