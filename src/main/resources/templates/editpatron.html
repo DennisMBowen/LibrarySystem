@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Edit Patron</title>
+	<meta charset="ISO-8859-1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<title>Library | Edit Patron</title>
+<style>
+body {
+background-image: url("/images/library-background.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
 </head>
-<body>
-	<h1>Edit Patron</h1>
-	<form th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST> 
-    	User Name: <input name="userName" class="form-control" size="20" th:field="*{userName}"> <br />
- 		Password: <input name="password" class="form-control" size="20" th:field="*{password}"> <br />
- 		First Name: <input name="firstName" class="form-control" size="20" th:field="*{firstName}"> <br />
- 		Last Name: <input name="lastName" class="form-control" size="20" th:field="*{lastName}"> <br />
- 		
- 		<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
- 	</form>
+<div class="container">
+<header>
+	<h1 style="color: white; text-align: center">Patrons</h1>
+	
+		<nav class="navbar navbar-expand-sm bg-light navbar-light shadow rounded">
+     	<ul class="navbar-nav">
+    		  <li class="nav-item">
+         		 <a href="../index.html" class="nav-link">Home
+         		 </a>
+      		  </li>
+      		  <li class="nav-item">
+         		 <a href="/viewAll" class="nav-link active">Catalog</a>
+        	  </li>
+       		  <li class="nav-item">  
+        		  <a href="/viewPatrons" class="nav-link">Patrons</a>
+        	  </li>  
+   
+      	</ul>
+        </nav>
 
+</header>
+<br>
+<body>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded">
+  <h1>Edit Patron</h1>
+  <div class="form-group">
+ 	<form th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST> 
+    User Name: <input name="userName" class="form-control" size="20" th:field="*{userName}"> <br />
+ 	Password: <input name="password" class="form-control" size="20" th:field="*{password}"> <br />
+ 	First Name: <input name="firstName" class="form-control" size="20" th:field="*{firstName}"> <br />
+ 	Last Name: <input name="lastName" class="form-control" size="20" th:field="*{lastName}"> <br />
+  </div>
+ 	<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
+ 	</form>
+</div>
 </body>
+</div>
 </html>
