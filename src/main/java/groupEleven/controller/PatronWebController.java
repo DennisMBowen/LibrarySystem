@@ -111,11 +111,10 @@ public class PatronWebController {
 	public String renewBook(@PathVariable("id") long id, @PathVariable("bid") long bid, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
 		Book b = bookRepo.findById(bid).orElse(null);
-		if (!b.isOverdue()) {
-			b.setDueDate(b.getDueDate().plusDays(14));
-		} else {
-			System.out.println("Unable to return. Book is overdue.");
+		if(b.isOverdue()) {
+			return "overdueMessage.html";
 		}
+		b.setDueDate(b.getDueDate().plusDays(14));
 		bookRepo.save(b);
 		return viewCheckedOutBooks(id, model);
 	}
