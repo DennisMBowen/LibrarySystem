@@ -13,6 +13,7 @@ background-attachment: fixed;
 }
 </style>
 </head>
+<body>
 <div class="container">
 <header>
 <h1 style="color: white; text-align: center">Patrons</h1>
@@ -35,8 +36,8 @@ background-attachment: fixed;
 
 
 </header>
+</div>
 <br>
-<body>
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
 	<h1>Check out a book for <span th:text="${patron.firstName}"></span> <span th:text="${patron.lastName}"></span></h1>
 	<table class="table table-hover">

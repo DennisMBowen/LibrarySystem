@@ -118,7 +118,7 @@ public class PatronWebController {
 		if(b.isOverdue()) {
 			return "overdueMessage.html";
 		}
-		b.setDueDate(b.getDueDate().plusDays(14));
+		b.setDueDate(LocalDate.now().plusDays(14));
 		bookRepo.save(b);
 		return viewCheckedOutBooks(id, model);
 	}
