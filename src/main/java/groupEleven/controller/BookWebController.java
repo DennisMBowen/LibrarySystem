@@ -2,6 +2,7 @@ package groupEleven.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,8 +38,13 @@ public class BookWebController {
 		//if(repo.findAll().isEmpty()) {
 			//return addNewBook(model);
 		//}
-		model.addAttribute("books", bookRepo.findAll());
-		return "results";
+		
+		List<Book> books = bookRepo.findAll();
+		// This line sorts by title
+		Collections.sort(books, (b1, b2) -> (b1.getTitle().compareTo(b2.getTitle())));
+		
+		model.addAttribute("books", books);
+		return "booklist";
 	}
 	
 	@GetMapping("/viewAvailable")
