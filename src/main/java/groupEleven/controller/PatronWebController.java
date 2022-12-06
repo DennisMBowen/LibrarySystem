@@ -83,12 +83,6 @@ public class PatronWebController {
 			return "overdueMessage.html";
 		}
 		
-		/*for (int i = 0; i <= p.getCheckedOutBooks().size(); i++) {
-			Book currentBook = p.getCheckedOutBooks().get(i);
-			if(currentBook.isOverdue()) {
-				return "overdueMessage.html";
-			}
-		}*/
 		model.addAttribute("patron", p);
 		List<Book> availableBooks = new ArrayList<Book>();
 		List <Book> allBooks = new ArrayList<Book>();
