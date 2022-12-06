@@ -12,6 +12,29 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 </style>
+<script>
+function validateForm() {	
+	if (form.userNameInput.value == "") {
+		alert("Please input a user name.");
+		form.userNameInput.focus();
+		return false;
+	} else if (form.passwordInput.value == "") {
+		alert("Please input a password.");
+		form.passwordInput.focus();
+		return false;
+	} else if (form.firstNameInput.value == "") {
+		alert("Please input a first name.");
+		form.firstNameInput.focus();
+		return false;
+	} else if (form.lastNameInput.value == "") {
+		alert("Please input a last name.");
+		form.lastNameInput.focus();
+		return false;
+	} else {
+		return true;
+	}		
+}
+</script>
 </head>
 <div class="container">
 <header>
@@ -39,11 +62,11 @@ background-attachment: fixed;
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
   <h1>Edit Patron</h1>
   <div class="form-group">
- 	<form th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST> 
-    User Name: <input name="userName" class="form-control" size="20" th:field="*{userName}"> <br />
- 	Password: <input name="password" class="form-control" size="20" th:field="*{password}"> <br />
- 	First Name: <input name="firstName" class="form-control" size="20" th:field="*{firstName}"> <br />
- 	Last Name: <input name="lastName" class="form-control" size="20" th:field="*{lastName}"> <br />
+ 	<form id="form" th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST onsubmit="return validateForm(this)"> 
+    User Name: <input name="userName" class="form-control" id="userNameInput" size="20" th:field="*{userName}"> <br />
+ 	Password: <input name="password" class="form-control" id="passwordInput" size="20" th:field="*{password}"> <br />
+ 	First Name: <input name="firstName" class="form-control" id="firstNameInput" size="20" th:field="*{firstName}"> <br />
+ 	Last Name: <input name="lastName" class="form-control" id="lastNameInput" size="20" th:field="*{lastName}"> <br />
   </div>
  	<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
  	</form>
