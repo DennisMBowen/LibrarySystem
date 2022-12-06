@@ -79,6 +79,16 @@ public class PatronWebController {
 	@GetMapping ("/checkOut/{id}")
 	public String checkOutBooks(@PathVariable("id") long id, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
+		if(p.hasOverdueBooks()) {
+			return "overdueMessage.html";
+		}
+		
+		/*for (int i = 0; i <= p.getCheckedOutBooks().size(); i++) {
+			Book currentBook = p.getCheckedOutBooks().get(i);
+			if(currentBook.isOverdue()) {
+				return "overdueMessage.html";
+			}
+		}*/
 		model.addAttribute("patron", p);
 		List<Book> availableBooks = new ArrayList<Book>();
 		List <Book> allBooks = new ArrayList<Book>();

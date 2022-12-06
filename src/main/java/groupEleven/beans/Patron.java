@@ -55,5 +55,15 @@ public class Patron {
 	public void returnBook(Book b) {
 		this.checkedOutBooks.remove(b);
 	}
+	
+	public boolean hasOverdueBooks() {
+		for (int i = 0; i <= this.getCheckedOutBooks().size(); i++) {
+			Book currentBook = this.getCheckedOutBooks().get(i);
+			if(currentBook.isOverdue()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
