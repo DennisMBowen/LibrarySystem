@@ -42,16 +42,14 @@ background-attachment: fixed;
 		<table class="table table-hover">
 		 <thead>
 			<tr>
-				<th>UserName</th>
-				<th>Password</th>
+				<th>Library Number</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 			</tr>
 			</thead>
 			<tbody>
 				<tr th:each="currentPatron : ${patrons}">
-				<td th:text="${currentPatron.userName}" />
-				<td th:text="${currentPatron.password}" />
+				<td th:text="${currentPatron.libraryNumber}" />
 				<td th:text="${currentPatron.firstName}" />
 				<td th:text="${currentPatron.lastName}" />
 				<td><a th:href="@{/editPatron/{id}(id=${currentPatron.id})}">Edit Patron</a></td>

@@ -26,8 +26,7 @@ public class Patron {
 	@Id
 	@GeneratedValue
 	private long id;
-	private String userName;
-	private String password;
+	private String libraryNumber;
 	private String firstName;
 	private String lastName;
 	
@@ -35,10 +34,9 @@ public class Patron {
 	@JoinColumn(name = "books", nullable = true)
 	private List<Book> checkedOutBooks;
 	
-	public Patron(String userName, String password, String firstName, String lastName, List<Book> checkedOutBooks) {
+	public Patron(String libraryNumber, String firstName, String lastName, List<Book> checkedOutBooks) {
 		super();
-		this.userName = userName;
-		this.password = password;
+		this.libraryNumber = libraryNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		if(checkedOutBooks == null) {

@@ -14,13 +14,9 @@ background-attachment: fixed;
 </style>
 <script>
 function validateForm() {	
-	if (form.userNameInput.value == "") {
-		alert("Please input a user name.");
-		form.userNameInput.focus();
-		return false;
-	} else if (form.passwordInput.value == "") {
-		alert("Please input a password.");
-		form.passwordInput.focus();
+	if (form.libraryNumberInput.value == "") {
+		alert("Please input a library number.");
+		form.libraryNumberInput.focus();
 		return false;
 	} else if (form.firstNameInput.value == "") {
 		alert("Please input a first name.");
@@ -63,8 +59,7 @@ function validateForm() {
   <h1>Edit Patron</h1>
   <div class="form-group">
  	<form id="form" th:object="${newPatron}" th:action="@{/updatePatron/{id}(id=${newPatron.id})}" method=POST onsubmit="return validateForm(this)"> 
-    User Name: <input name="userName" class="form-control" id="userNameInput" size="20" th:field="*{userName}"> <br />
- 	Password: <input name="password" class="form-control" id="passwordInput" size="20" th:field="*{password}"> <br />
+    User Name: <input name="userName" class="form-control" id="libraryNumberInput" size="20" th:field="*{libraryNumber}"> <br />
  	First Name: <input name="firstName" class="form-control" id="firstNameInput" size="20" th:field="*{firstName}"> <br />
  	Last Name: <input name="lastName" class="form-control" id="lastNameInput" size="20" th:field="*{lastName}"> <br />
   </div>
