@@ -98,9 +98,9 @@ public class BookWebController {
 	
 	@GetMapping("/addSample")
 	public String addSampleBooks(Model model) {
-		Patron p = new Patron("aheinrichs", "root", "Alex", "Heinrichs", null);
-		Patron p2 = new Patron("jhill", "yeet", "Joe", "Hill", null);
-		Patron p3 = new Patron("glanphier", "abc123", "Gabe", "Lanphier", null);
+		Patron p = new Patron("696969", "Alex", "Heinrichs", null);
+		Patron p2 = new Patron("112334", "Joe", "Hill", null);
+		Patron p3 = new Patron("654321", "Gabe", "Lanphier", null);
 		patronRepo.save(p);
 		patronRepo.save(p2);
 		patronRepo.save(p3);

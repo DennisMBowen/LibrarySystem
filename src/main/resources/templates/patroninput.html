@@ -15,23 +15,10 @@ background-attachment: fixed;
 }
 </style>
 <script>
-function showHidePassword() {
-	let pWord = document.getElementById("passwordInputBox");
-	if(pWord.type === "password") {
-		pWord.type = "text";
-	} else {
-		pWord.type = "password";
-	}
-}
-
 function validateForm() {	
-	if (form.userNameInputBox.value == "") {
-		alert("Please input a user name.");
-		form.userNameInputBox.focus();
-		return false;
-	} else if (form.passwordInputBox.value == "") {
-		alert("Please input a password.");
-		form.passwordInputBox.focus();
+	if (form.libraryNumberInputBox.value == "") {
+		alert("Please input a library number");
+		form.libraryNumberInputBox.focus();
 		return false;
 	} else if (form.firstNameInputBox.value == "") {
 		alert("Please input a first name.");
@@ -47,6 +34,7 @@ function validateForm() {
 }
 </script>
 </head>
+<body>
 <div class="container">
 <header>
 <h1 style="color: white; text-align: center">Patrons</h1>
@@ -70,16 +58,11 @@ function validateForm() {
 
 </header>
 <br>
-<body>
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-	<h1 style="text-align: center">Add Patron</h1>
-	<form id="form" th:object="${newPatron}" th:action="@{/addPatron}" method=POST onsubmit="return validateForm(this)">
-User Name: <input class="form-control" name="userName" id="userNameInputBox" size="20" placeholder="Enter user name" th:field="*{userName}"><br />
-<span id="userNameInput"></span>
-Password: <input class="form-control" type="password" id="passwordInputBox" name="password" size="20" placeholder="Enter password" th:field="*{password}">
-<input style="padding: 0px 0px 0px 0px" type="checkbox" onclick="showHidePassword()">  Show Password<br>
-<span id="passwordInput"></span>
-<br>
+<h1 style="text-align: center">Add Patron</h1>
+<form id="form" th:object="${newPatron}" th:action="@{/addPatron}" method=POST onsubmit="return validateForm(this)">
+User Name: <input class="form-control" name="libraryNumber" id="userNameInputBox" size="20" placeholder="Enter library number" th:field="*{libraryNumber}"><br />
+<span id="libraryNumberInput"></span>
 First Name: <input class="form-control" name="firstName" id="firstNameInputBox" size="20" placeholder="Enter first name" th:field="*{firstName}"><br />
 <span id="firstNameInput"></span>
 Last Name: <input class="form-control" name="lastName" id="lastNameInputBox" size="20" placeholder="Enter last name" th:field="*{lastName}"><br />
@@ -88,6 +71,6 @@ Last Name: <input class="form-control" name="lastName" id="lastNameInputBox" siz
 <input name="Submit" class="btn btn-primary" type="submit" value="Submit" />
 </form>
 </div>
-</body>
 </div>
+</body>
 </html>
