@@ -47,6 +47,25 @@ public class BookWebController {
 		return "booklist";
 	}
 	
+	
+	@GetMapping({"/viewAllByAuthor"})
+	public String viewAllByAuthor(Model model) {
+		List<Book> books = bookRepo.findAll();
+		Collections.sort(books, (b1, b2) -> (b1.getAuthor().compareTo((b2.getAuthor()))));
+		
+		model.addAttribute("books", books);
+		return "booklist";
+	}
+	
+	@GetMapping({"/viewAllByID"})
+	public String viewAllByID(Model model) {
+		List<Book> books = bookRepo.findAll();
+	
+		
+		model.addAttribute("books", books);
+		return "booklist";
+	}
+	
 	@GetMapping("/viewAvailable")
 	public String viewAvailableBooks(Model model) {
 		List<Book> availableBooks = new ArrayList<Book>();
@@ -81,8 +100,10 @@ public class BookWebController {
 	public String addSampleBooks(Model model) {
 		Patron p = new Patron("aheinrichs", "root", "Alex", "Heinrichs", null);
 		Patron p2 = new Patron("jhill", "yeet", "Joe", "Hill", null);
+		Patron p3 = new Patron("glanphier", "abc123", "Gabe", "Lanphier", null);
 		patronRepo.save(p);
 		patronRepo.save(p2);
+		patronRepo.save(p3);
 		Book b = new Book("The Godfather", "Mario Puzo", "9780593542590", null, LocalDate.of(2022, 11, 29));
 		b.setPatron(p);
 		p.checkOutBook(b);
