@@ -12,6 +12,29 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 </style>
+<script>
+function validateForm() {	
+	if (form.titleInput.value == "") {
+		alert("Please input a title.");
+		form.titleInput.focus();
+		return false;
+	} else if (form.authorInput.value == "") {
+		alert("Please input an author.");
+		form.authorInput.focus();
+		return false;
+	} else if (form.isbnInput.value == "") {
+		alert("Please input an ISBN.");
+		form.isbnInput.focus();
+		return false;
+	} else if (form.dueDateInput.value == "") {
+		alert("Please input a due date.");
+		form.dueDateInput.focus();
+		return false;
+	} else {
+		return true;
+	}		
+}
+</script>
 </head>
 <div class="container">
 <header>
@@ -39,11 +62,11 @@ background-attachment: fixed;
 <div class="container shadow-lg p-3 mb-5 bg-white rounded">
   <h1>Edit Book</h1>
   <div class="form-group">
- 	<form th:object="${newBook}" th:action="@{/update/{id}(id=${newBook.id})}" method=POST> 
-    	Title: <input name="title" class="form-control" size="20" th:field="*{title}"> <br />
- 		Author: <input name="author" class="form-control" size="20" th:field="*{author}"> <br />
- 		ISBN: <input name="isbn" class="form-control" size="20" th:field="*{isbn}"> <br />
-    	Due Date: <input type = "date" class="form-control" name = "dueDate" th:field="*{dueDate}"><br />
+ 	<form id="form" th:object="${newBook}" th:action="@{/update/{id}(id=${newBook.id})}" method=POST onsubmit="return validateForm(this)"> 
+    	Title: <input name="title" class="form-control" id="titleInput" size="20" th:field="*{title}"> <br />
+ 		Author: <input name="author" class="form-control" id="authorInput" size="20" th:field="*{author}"> <br />
+ 		ISBN: <input name="isbn" class="form-control" id="isbnInput" size="20" th:field="*{isbn}"> <br />
+    	Due Date: <input type = "date" class="form-control" name = "dueDate" id="dueDateInput" th:field="*{dueDate}"><br />
  		</div>
  		<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
  	</form>
