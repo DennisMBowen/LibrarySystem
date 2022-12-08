@@ -26,13 +26,17 @@ function validateForm() {
 		alert("Please input an ISBN.");
 		form.isbnInput.focus();
 		return false;
-	} else if (form.dueDateInput.value == "") {
-		alert("Please input a due date.");
-		form.dueDateInput.focus();
+	} else if (form.timesRenewedInput.value == "") {
+		alert("Invalid input in times renewed. Please enter 0 if the new book has not been renewed or is checked in.");
+		form.timesRenewedInput.focus();
 		return false;
-	} else {
+	} else if ((form.timesRenewedInput.value % 1) != 0) {
+		alert("Invalid input in times renewed. Please enter a number. Enter 0 if the new book has not been renewed or is checked in.")
+		form.timesRenewedInput.focus();
+		return false;
+	}	else {
 		return true;
-	}		
+	}
 }
 </script>
 </head>
@@ -67,6 +71,7 @@ function validateForm() {
  		Author: <input name="author" class="form-control" id="authorInput" size="20" th:field="*{author}"> <br />
  		ISBN: <input name="isbn" class="form-control" id="isbnInput" size="20" th:field="*{isbn}"> <br />
     	Due Date: <input type = "date" class="form-control" name = "dueDate" id="dueDateInput" th:field="*{dueDate}"><br />
+    	Times Renewed: <input name = "timesRenewed" class="form-control" id="timesRenewedInput" th:field="*{timesRenewed}"><br />
  		</div>
  		<input name="submit" class="btn btn-primary" type="submit" value="Submit" /> 
  	</form>
