@@ -139,6 +139,9 @@ public class BookWebController {
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable("id") long id, Model model) {
 		Book b = bookRepo.findById(id).orElse(null);
+		if(b.getDueDate() != null) {
+			return "unableToDelete";
+		}
 		bookRepo.delete(b);
 		return viewAllBooks(model);
 	}

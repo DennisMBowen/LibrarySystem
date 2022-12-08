@@ -52,6 +52,9 @@ public class PatronWebController {
 	@GetMapping("/deletePatron/{id}")
 	public String deletePatron(@PathVariable("id") long id, Model model) {
 		Patron p = patronRepo.findById(id).orElse(null);
+		if(!p.getCheckedOutBooks().isEmpty()) {
+			return "unableToDelete";
+		}
 		patronRepo.delete(p);
 		return viewPatrons(model);
 	}
@@ -106,6 +109,7 @@ public class PatronWebController {
 		//sets dueDate on Book entity to 2 weeks from now()
 		LocalDate dueDate = LocalDate.now().plusDays(14);
 		b.setDueDate(dueDate);
+		b.setTimesRenewed(0);
 		patronRepo.save(p);
 		bookRepo.save(b);
 		return viewPatrons(model);
@@ -116,9 +120,16 @@ public class PatronWebController {
 		Patron p = patronRepo.findById(id).orElse(null);
 		Book b = bookRepo.findById(bid).orElse(null);
 		if(b.isOverdue()) {
-			return "overdueMessage.html";
+			return "overdueMessage";
 		}
-		b.setDueDate(LocalDate.now().plusDays(14));
+		if(b.getTimesRenewed() > 1) {
+			return "unableToRenew";
+		} else if(b.getTimesRenewed() == 1) {
+			b.setDueDate(b.getDueDate().plusDays(7));;
+		} else {
+			b.setDueDate(b.getDueDate().plusDays(14));
+		}
+		b.setTimesRenewed(b.getTimesRenewed() + 1);
 		bookRepo.save(b);
 		return viewCheckedOutBooks(id, model);
 	}
@@ -139,6 +150,7 @@ public class PatronWebController {
 		p.returnBook(b);
 		b.setPatron(null);
 		b.setDueDate(null);
+		b.setTimesRenewed(0);		
 		bookRepo.save(b);
 		return viewCheckedOutBooks(id, model);
 	}

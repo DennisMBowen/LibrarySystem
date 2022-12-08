@@ -26,6 +26,7 @@ public class Book {
 	private String title;
 	private String author;
 	private String isbn;
+	private int timesRenewed;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "patron", nullable = true)
